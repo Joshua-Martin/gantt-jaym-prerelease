@@ -14,7 +14,17 @@ import TodayMarker from '../grid/TodayMarker';
 import StatusList from '../list/StatusList';
 import DependencyLines from '../grid/DependencyLines';
 
-export const GanttChart: React.FC = () => {
+/**
+ * SvgGantt is a React component that renders a Gantt chart using SVG.
+ * It supports projects, tasks, milestones, and dependencies visualization.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <SvgGantt />
+ * ```
+ */
+export const SvgGantt: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   // Ref for GanttChart container
   const timelineRef = useRef<HTMLDivElement>(null);
@@ -339,4 +349,4 @@ export const GanttChart: React.FC = () => {
   );
 };
 
-export default GanttChart;
+export default SvgGantt;

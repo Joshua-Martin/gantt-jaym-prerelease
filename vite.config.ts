@@ -1,56 +1,30 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import path from 'path';
+import { resolve } from 'path';
+import dts from 'vite-plugin-dts';
 
 export default defineConfig({
   plugins: [
-    react({
-      jsxRuntime: 'automatic',
-      jsxImportSource: 'react',
+    react(),
+    dts({
+      insertTypesEntry: true,
     }),
   ],
-  optimizeDeps: {
-    exclude: ['pdfjs-dist'],
-  },
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-    },
-  },
-  server: {
-    hmr: {
-      overlay: true,
-    },
-  },
   build: {
-    outDir: 'landing',
-    emptyOutDir: true,
-    assetsDir: 'assets',
+    lib: {
+      entry: resolve(__dirname, 'src/index.ts'),
+      name: 'ReactGanttChart',
+      formats: ['es', 'umd'],
+      fileName: format => `index.${format}.js`,
+    },
     rollupOptions: {
-      external: [
-        // Ignore everything in src/notes
-        /^src\/notes\/.+/,
-        // ignore firebase cli config files
-        'firebase.json',
-        '.firebaserc',
-        'firebase-debug.log',
-        'storage.rules',
-        'cors.json',
-      ],
+      external: ['react', 'react-dom'],
       output: {
-        manualChunks(id) {
-          if (id.includes('node_modules')) {
-            return 'vendor';
-          }
-          if (id.includes('src/pages/views')) {
-            return 'views';
-          }
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
         },
-        entryFileNames: 'assets/[name]-[hash].js',
-        chunkFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]',
       },
     },
   },
-  base: './',
 });

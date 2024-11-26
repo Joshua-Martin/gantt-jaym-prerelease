@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500');
+@import url('https://fonts.googleapis.com/css?family=Lato:400,500');
+
+body {
+  font-family: 'Arimo', sans-serif;
+}
+
+@keyframes highlightNew {
+  0% {
+    background-color: rgba(59, 130, 246, 0.1);
+    box-shadow: 0 0 20px 4px rgba(59, 130, 246, 0.3);
+  }
+  45% {
+    background-color: rgba(59, 130, 246, 0.05);
+    box-shadow: 0 0 0px 0px rgba(59, 130, 246, 0);
+  }
+  90%,
+  100% {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 0px 0px rgba(59, 130, 246, 0);
+  }
+}
+
+.new-item-animation {
+  animation: highlightNew 1.5s ease-in-out;
+  background-color: white; /* This ensures it stays white after animation */
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
